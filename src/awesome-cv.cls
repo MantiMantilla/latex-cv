@@ -95,6 +95,8 @@
 \urlstyle{same}
 % Solves issues Warning: File `cv.out' has changed
 \RequirePackage{bookmark}
+% Custom date format for footer
+\RequirePackage{datetime}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -617,6 +619,11 @@
 		\ifthenelse{\equal{\@photoalign}{right}}{\raggedleft\drawphoto}{}
 	\end{minipage}
 }
+
+% Define a date format for the footer
+% Usage: \monthyeardate{<date>}
+\newdateformat{monthyeardate}{%
+	\monthname[\THEMONTH], \THEYEAR}
 
 % Define a footer for CV
 % Usage: \makecvfooter{<left>}{<center>}{<right>}
