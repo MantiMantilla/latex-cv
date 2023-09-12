@@ -85,11 +85,14 @@
 % Needed to deal hyperlink
 \RequirePackage[hidelinks,unicode,pdfpagelabels=false]{hyperref}
 \hypersetup{%
+	colorlinks=true,
+	urlcolor=awesome-red,
 	pdftitle={},
 	pdfauthor={},
 	pdfsubject={},
 	pdfkeywords={}
 }
+\urlstyle{same}
 % Solves issues Warning: File `cv.out' has changed
 \RequirePackage{bookmark}
 
