@@ -97,6 +97,8 @@
 \RequirePackage{bookmark}
 % Custom date format for footer
 \RequirePackage{datetime}
+% Change default language (Awesome CV does not provide translations to hard-coded values.)
+\RequirePackage[spanish, es-noshorthands]{babel}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
