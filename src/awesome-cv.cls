@@ -289,6 +289,10 @@
 % Usage: \homepage{<url>}
 \newcommand*{\homepage}[1]{\def\@homepage{#1}}
 
+% Defines writer's chess.com (optional)
+%Usage \chesscom{<chess.com-nick>}
+\newcommand*{\chesscom}[2]{\def\@chesscom{#1}\def\@chesscomElo{#2}}
+
 % Defines writer's github (optional)
 % Usage: \github{<github-nick>}
 \newcommand*{\github}[1]{\def\@github{#1}}
@@ -309,7 +313,7 @@
 
 % Defines writer's linked-in (optional)
 % Usage: \linkedin{<linked-in-nick>}
-\newcommand*{\linkedin}[1]{\def\@linkedin{#1}}
+\newcommand*{\linkedin}[2]{\def\@linkedin{#1}\def\@linkedinPath{#2}}
 
 % Defines writer's orcid (optional)
 % Usage: \orcid{<orcid-num>}
@@ -489,6 +493,12 @@
 				\href{\@teluri}{\faMobile\acvHeaderIconSep\@mobile}%
 				\setbool{isstart}{false}%
 			}%
+			\ifthenelse{\isundefined{\@chesscom}}%
+			{}%
+			{%
+				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
+        \href{https://www.chess.com/member/\@chesscom}{\faChessPawn\acvHeaderIconSep\@chesscom\ (\@chesscomElo)}%
+			}%
 			\ifthenelse{\isundefined{\@email}}%
 			{}%
 			{%
@@ -508,7 +518,7 @@
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
 				\href{http://\@homepage}{\faHome\acvHeaderIconSep\@homepage}%
 			}%
-			\ifthenelse{\isundefined{\@github}}%
+      \ifthenelse{\isundefined{\@github}}%
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
@@ -536,7 +546,7 @@
 			{}%
 			{%
 				\ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-				\href{https://www.linkedin.com/in/\@linkedin}{\faLinkedin\acvHeaderIconSep\@linkedin}%
+				\href{https://www.linkedin.com/in/\@linkedinPath}{\faLinkedin\acvHeaderIconSep\@linkedin}%
 			}%
 			\ifthenelse{\isundefined{\@orcid}}%
 			{}%
