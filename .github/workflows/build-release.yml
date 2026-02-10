@@ -22,8 +22,8 @@ jobs:
 
       - name: Install TeX Live
         run: |
-          apt-get update
-          apt-get install -y texlive-full
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
 
       - name: Compile CV
         run: |
