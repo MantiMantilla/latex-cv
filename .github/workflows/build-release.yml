@@ -28,6 +28,7 @@ jobs:
         with:
           root_file: main.tex
           latexmk_use_xelatex: true
+          working_directory: src
 
       - name: Rename outputs
         run: |
