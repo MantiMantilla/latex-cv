@@ -1,0 +1,64 @@
+name: Build and Release LaTeX CV
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - '!src/static/**'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup TeX Live
+        uses: zyedidia/setup-texlive@v1
+        with:
+          version: 2023
+
+      - name: Compile CV
+        run: |
+          cd src && xelatex --interaction=nonstopmode main_cv.tex
+          xelatex --interaction=nonstopmode main_cl.tex
+
+      - name: Rename outputs
+        run: |
+          mv src/main_cv.pdf cv.pdf
+          mv src/main_cl.pdf cover_letter.pdf
+
+      - name: Delete existing release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+            const latestRelease = releases.find(r => r.tag_name === 'latest');
+            if (latestRelease) {
+              await github.rest.repos.deleteRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                release_id: latestRelease.id
+              });
+              console.log('Deleted existing "latest" release');
+            }
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          files: |
+            cv.pdf
+            cover_letter.pdf
+          generate_release_notes: true
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
