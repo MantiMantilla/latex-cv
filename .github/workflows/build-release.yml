@@ -29,7 +29,7 @@ jobs:
           root_file: |
             main_cv.tex
             main_cl.tex
-          texlive_version: 2024
+          texlive_version: 2023
           latexmk_use_xelatex: true
           working_directory: src
 
