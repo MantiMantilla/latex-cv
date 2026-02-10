@@ -17,10 +17,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup TeX Live
-        uses: zyedidia/setup-texlive@v1
-        with:
-          version: 2023
+      - name: Install TeX Live
+        run: |
+          apt-get update
+          apt-get install -y texlive-full
 
       - name: Compile CV
         run: |
