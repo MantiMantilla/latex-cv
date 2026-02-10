@@ -26,7 +26,9 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: main.tex
+          root_file: |
+            main_cv.tex
+            main_cl.tex
           latexmk_use_xelatex: true
           working_directory: src
 
